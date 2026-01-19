@@ -1,0 +1,16 @@
+[
+  {
+    "authors": "Your Name, Coauthor A",
+    "title": "Title of the paper",
+    "venue": "Journal Name",
+    "year": 20XX,
+    "url": "https://example.com/paper1.pdf"
+  },
+  {
+    "authors": "Your Name, Coauthor B",
+    "title": "Another important result",
+    "venue": "Conference Proceedings",
+    "year": 20XX,
+    "url": "https://example.com/paper2.pdf"
+  }
+]
