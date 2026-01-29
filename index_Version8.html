@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Your Name — Personal Homepage (with PDF preview)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Top area: left square photo + right profile -->
+    <header class="top-grid">
+      <div class="hero">
+        <!-- Replace with your square profile photo at images/profile.jpg -->
+        <img src="images/profile.jpg" alt="Profile photo" />
+      </div>
+
+      <div class="profile-info">
+        <h1 class="name">Your Name</h1>
+        <p class="position">Position / Affiliation</p>
+        <p class="bio">Short bio: research interests, keywords, or one-line summary. Optionally include a sentence about current projects.</p>
+
+        <p class="contacts">
+          <a href="mailto:you@example.com">you@example.com</a>
+          <span class="sep">|</span>
+          <a href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar</a>
+          <span class="sep">|</span>
+          <a href="https://orcid.org" target="_blank" rel="noopener">ORCID</a>
+        </p>
+      </div>
+    </header>
+
+    <!-- Papers section -->
+    <main>
+      <section class="papers">
+        <h2>Selected papers and preprints</h2>
+        <ul>
+          <li>
+            <a class="paper-link" href="papers/On_the_end_point_of_Stein_Weiss_inequality.pdf" data-title="On the end-point of Stein–Weiss inequality">
+              <strong>On the end-point of Stein–Weiss inequality</strong>
+            </a>
+            , joint with C. Sun. To appear in The Journal of Geometric Analysis.
+          </li>
+
+          <li>
+            <a class="paper-link" href="papers/paper2.pdf" data-title="Paper 2 Title (example)">
+              <strong>Paper 2 Title (example)</strong>
+            </a>
+            , short note (year / venue / coauthors).
+          </li>
+
+          <li>
+            <a class="paper-link" href="papers/paper3.pdf" data-title="Paper 3 Title (example)">
+              <strong>Paper 3 Title (example)</strong>
+            </a>
+            , short note.
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- Bottom cards: left and right -->
+    <footer class="cards">
+      <a class="card left" href="mass.html">
+        <div class="card-thumb">MASS</div>
+        <div class="card-label">MASS program</div>
+      </a>
+
+      <a class="card right" href="photo-album.html">
+        <div class="card-thumb">📷</div>
+        <div class="card-label">Photo album</div>
+      </a>
+    </footer>
+  </div>
+
+  <!-- PDF preview modal -->
+  <div id="pdfModal" class="pdf-modal" aria-hidden="true" role="dialog" aria-label="PDF viewer">
+    <div class="pdf-overlay" data-close="true"></div>
+    <div class="pdf-container" role="document">
+      <div class="pdf-toolbar" role="toolbar">
+        <div class="pdf-title" id="pdfTitle">Document</div>
+        <div class="pdf-actions">
+          <a id="openNewTab" class="pdf-action" target="_blank" rel="noopener">Open in new tab</a>
+          <a id="downloadPdf" class="pdf-action" download>Download</a>
+          <button id="closePdf" class="pdf-action btn-close" aria-label="Close viewer">Close</button>
+        </div>
+      </div>
+
+      <div class="pdf-body">
+        <!-- iframe used to embed PDF -->
+        <iframe id="pdfFrame" src="" frameborder="0" aria-labelledby="pdfTitle"></iframe>
+
+        <!-- fallback/instruction area -->
+        <div id="pdfFallback" class="pdf-fallback" hidden>
+          <p>Unable to display the PDF inside the page. You can <a id="fallbackOpen" href="#" target="_blank" rel="noopener">open it in a new tab</a> or <a id="fallbackDownload" href="#" download>download</a> the file.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // Modal elements
+      const modal = document.getElementById('pdfModal');
+      const overlay = modal.querySelector('.pdf-overlay');
+      const frame = document.getElementById('pdfFrame');
+      const titleEl = document.getElementById('pdfTitle');
+      const openNewTab = document.getElementById('openNewTab');
+      const downloadPdf = document.getElementById('downloadPdf');
+      const closeBtn = document.getElementById('closePdf');
+      const fallback = document.getElementById('pdfFallback');
+      const fallbackOpen = document.getElementById('fallbackOpen');
+      const fallbackDownload = document.getElementById('fallbackDownload');
+
+      let lastFocused = null;
+
+      // Open modal with given PDF url and title
+      function openPdf(url, title) {
+        lastFocused = document.activeElement;
+        titleEl.textContent = title || 'Document';
+        // Set links
+        openNewTab.href = url;
+        downloadPdf.href = url;
+        fallbackOpen.href = url;
+        fallbackDownload.href = url;
+
+        // Show modal
+        modal.setAttribute('aria-hidden', 'false');
+        modal.classList.add('open');
+
+        // Try to embed via iframe
+        // For some servers, embedding may be blocked; still set src and show fallback if load fails.
+        frame.src = url;
+        frame.removeAttribute('hidden');
+        fallback.hidden = true;
+
+        // Focus the close button for accessibility
+        closeBtn.focus();
+
+        // Try to detect embedding failure: if iframe loads but contentWindow is blocked, onload may still fire.
+        // We put a timeout: if loading doesn't finish within a second or error occurs, show fallback message.
+        // Note: detection is heuristic due to cross-origin constraints.
+        let loaded = false;
+        const onLoad = () => { loaded = true; cleanupTimer(); };
+        frame.addEventListener('load', onLoad, { once: true });
+
+        const timer = setTimeout(() => {
+          if (!loaded) {
+            // Show fallback, keep links for open/download
+            frame.setAttribute('hidden', 'true');
+            fallback.hidden = false;
+          }
+        }, 900);
+
+        function cleanupTimer() {
+          clearTimeout(timer);
+          frame.removeEventListener('load', onLoad);
+        }
+      }
+
+      function closePdf() {
+        modal.setAttribute('aria-hidden', 'true');
+        modal.classList.remove('open');
+        // Clear iframe to stop download/processing
+        frame.src = '';
+        // restore focus
+        if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+      }
+
+      // Attach click handlers to paper links
+      document.querySelectorAll('.paper-link').forEach(a => {
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          const url = a.getAttribute('href');
+          const title = a.dataset.title || a.textContent || 'Document';
+          openPdf(url, title);
+        });
+      });
+
+      // Close handlers
+      overlay.addEventListener('click', closePdf);
+      closeBtn.addEventListener('click', closePdf);
+
+      // Close on Esc
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) {
+          closePdf();
+        }
+      });
+
+      // Prevent focus leaving modal while open (basic trap)
+      document.addEventListener('focus', function (e) {
+        if (modal.classList.contains('open') && !modal.contains(e.target)) {
+          e.stopPropagation();
+          closeBtn.focus();
+        }
+      }, true);
+    })();
+  </script>
+</body>
+</html>
