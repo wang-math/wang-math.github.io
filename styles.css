@@ -33,16 +33,16 @@ a:hover, a:focus { text-decoration: underline; color: var(--link); }
 /* Top layout: left square photo, right info */
 .top-grid{
   display:grid;
-  grid-template-columns: 220px 1fr; /* left square photo, right info */
+  grid-template-columns: 480px 1fr; /* left square photo, right info */
   gap:var(--gap);
   align-items:start;
   margin-bottom:28px;
 }
 
 /* Square photo container */
-.hero{
-  width:220px;
-  height:220px;
+.hero {
+  width:480px;   /* 改为你想要的宽度 */
+  height:320px;  /* 改为你想要的高度 */
   background:#f6f6f6;
   border-radius:8px;
   overflow:hidden;
@@ -52,11 +52,16 @@ a:hover, a:focus { text-decoration: underline; color: var(--link); }
   flex-shrink:0;
 }
 
-.hero img{
+.hero img {
   width:100%;
   height:100%;
   object-fit:cover;
   display:block;
+}
+
+@media (max-width:880px){
+  .top-grid{ grid-template-columns: 1fr; gap:18px; }
+  .hero{ width:480px; height:320px; margin:0 auto; }
 }
 
 /* Profile info (right) */
