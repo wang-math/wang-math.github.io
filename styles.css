@@ -67,6 +67,7 @@ a:hover, a:focus { text-decoration: underline; color: var(--link); }
 /* Profile info (right) */
 .profile-info .name {
   font-weight: 600;
+  margin-top: 0
 }
 
 .profile-info .bio {
