@@ -73,7 +73,7 @@ a:hover, a:focus { text-decoration: underline; color: var(--link); }
 .profile-info .bio {
   font-weight: 400;
   color: #444; /* 深灰 */
-  font-size: 1.25em;
+  font-size: 1.05em;
   font-family: "Georgia", "Times New Roman", Times, serif;
   line-height: 1.3;
 }
@@ -87,9 +87,11 @@ a:hover, a:focus { text-decoration: underline; color: var(--link); }
   box-shadow:0 1px 0 rgba(0,0,0,0.04);
 }
 
-.papers h2{
-  margin:0 0 12px 0;
-  font-size:1.1rem;
+.papers h2 {
+  font-size: 2.2em;        /* 更大字号 */
+  color: #7b8593;          /* 更浅的蓝灰色（你可以改为你喜欢的色号） */
+  margin-bottom: 1.8em;
+  font-weight: 600;         /* 字体略粗美观 */
 }
 
 .papers ul{
