@@ -70,12 +70,30 @@ a:hover, a:focus { text-decoration: underline; color: var(--link); }
   margin-top: 0
 }
 
+.profile-info .bio p {
+  margin-top: 0;
+  margin-bottom: 0.7em; /* 后续段落之间正常间距 */
+}
+
+/* 让前两段之间无间隙 */
+.profile-info .bio p:first-child {
+  margin-bottom: 0; /* 第一段底部无间距 */
+}
+.profile-info .bio p:nth-child(2) {
+  margin-top: 0;    /* 第二段顶部无间距，与第一段紧挨 */
+}
+
+/* 其它段均有正常间距，第三段起保持margin-top */
+.profile-info .bio p:nth-child(n+3) {
+  margin-top: 0.7em;
+}
 .profile-info .bio {
   font-weight: 400;
   color: #444; /* 深灰 */
   font-size: 1.15em;
   font-family: "Georgia", "Times New Roman", Times, serif;
   line-height: 1.3;
+  
 }
 
 /* Papers section */
@@ -88,7 +106,7 @@ a:hover, a:focus { text-decoration: underline; color: var(--link); }
 }
 
 .papers h2 {
-  font-size: 2.2em;        /* 更大字号 */
+  font-size: 2.0em;        /* 更大字号 */
   color: #7b8593;          /* 更浅的蓝灰色（你可以改为你喜欢的色号） */
   margin-bottom: 1.8em;
   font-weight: 600;         /* 字体略粗美观 */
