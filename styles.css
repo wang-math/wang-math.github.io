@@ -75,7 +75,7 @@ a:hover, a:focus { text-decoration: underline; color: var(--link); }
   color: #444; /* 深灰 */
   font-size: 1.25em;
   font-family: "Georgia", "Times New Roman", Times, serif;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 /* Papers section */
