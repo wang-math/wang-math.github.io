@@ -65,11 +65,16 @@ a:hover, a:focus { text-decoration: underline; color: var(--link); }
 }
 
 /* Profile info (right) */
+.profile-info .name {
+  font-weight: 600;
+}
+
 .profile-info .bio {
+  font-weight: 500;
+  color: #444; /* 深灰 */
   font-size: 1.25em;
   font-family: "Georgia", "Times New Roman", Times, serif;
   line-height: 1.6;
-  color: #555;
 }
 
 /* Papers section */
