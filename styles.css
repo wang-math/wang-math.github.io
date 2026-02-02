@@ -73,9 +73,9 @@ a:hover, a:focus { text-decoration: underline; color: var(--link); }
 .profile-info .bio {
   font-weight: 400;
   color: #444; /* 深灰 */
-  font-size: 0.9em;
+  font-size: 1.25em;
   font-family: "Georgia", "Times New Roman", Times, serif;
-  line-height: 1.2;
+  line-height: 1.6;
 }
 
 /* Papers section */
