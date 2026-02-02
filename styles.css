@@ -65,35 +65,12 @@ a:hover, a:focus { text-decoration: underline; color: var(--link); }
 }
 
 /* Profile info (right) */
-.profile-info .name{
-  margin:0 0 6px 0;
-  font-size:1.6rem;
-  font-weight:400; /* not bold */
+.profile-info .bio {
+  font-size: 1.25em;
+  font-family: "Georgia", "Times New Roman", Times, serif;
+  line-height: 1.6;
+  color: #555;
 }
-
-.profile-info .position{
-  margin:0 0 8px 0;
-  color:var(--muted);
-  font-weight:600;
-}
-
-.profile-info .bio{
-  margin:0 0 12px 0;
-  color:var(--text);
-  max-width:680px;
-}
-
-.contacts {
-  display:flex;
-  gap:8px;
-  align-items:center;
-  flex-wrap:wrap;
-}
-.contacts a{
-  color:var(--link);
-  font-weight:600;
-}
-.sep{ color:var(--muted); }
 
 /* Papers section */
 .papers{
