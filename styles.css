@@ -73,7 +73,7 @@ a:hover, a:focus { text-decoration: underline; color: var(--link); }
 .profile-info .bio {
   font-weight: 400;
   color: #444; /* 深灰 */
-  font-size: 1.05em;
+  font-size: 1.15em;
   font-family: "Georgia", "Times New Roman", Times, serif;
   line-height: 1.3;
 }
